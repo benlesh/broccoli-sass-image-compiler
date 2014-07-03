@@ -16,7 +16,7 @@ This is a broccoli library for processing image files and creating SASS variable
 
 ## Usage
 
-```JavaSript
+```JS
 var sassImageCompiler = require('broccoli-sass-image-compiler');
 
 var imageTree = sassImageCompiler('/some_dir', {
