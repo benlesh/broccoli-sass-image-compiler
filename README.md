@@ -16,6 +16,8 @@ This is a broccoli library for processing image files and creating SASS variable
 
 ## Usage
 
+In your `Brocfile.js`: 
+
 ```JS
 var sassImageCompiler = require('broccoli-sass-image-compiler');
 
