@@ -1,9 +1,9 @@
 /**
  *	broccoli-sass-image-compiler
  *  ©2014 Ben Lesh <ben@benlesh.com>
- *  MIT License
+ *  MIT License <https://github.com/blesh/broccoli-sass-image-compiler/blob/master/LICENSE.txt>
  */
- 
+
 var Writer = require('broccoli-writer');
 var DataURI = require('datauri');
 var helpers = require('broccoli-kitchen-sink-helpers');
