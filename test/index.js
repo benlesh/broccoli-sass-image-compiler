@@ -15,7 +15,7 @@ describe('broccoli-sass-image-compiler', function(){
 	});
 
 	afterEach(function(){
-		if(typeof builder === 'object' && typeof builder.cleanup === 'function') {
+		if(builder) {
 			builder.cleanup();
 		}
 	});
