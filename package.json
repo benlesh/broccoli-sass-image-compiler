@@ -1,0 +1,26 @@
+{
+  "name": "broccoli-sass-image-compiler",
+  "version": "0.0.0",
+  "description": "Compress images to Base64 Data URIs in variables and output to SCSS file",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blesh/broccoli-sass-image-compiler.git"
+  },
+  "keywords": [
+    "Broccoli",
+    "SASS",
+    "Images",
+    "Base64"
+  ],
+  "author": "Ben Lesh <ben@benlesh.com>",
+  "license": "MIT",
+  "dependencies": {
+    "broccoli-writer": "^0.1.1",
+    "datauri": "^0.5.5",
+    "mkdirp": "^0.5.0"
+  }
+}
