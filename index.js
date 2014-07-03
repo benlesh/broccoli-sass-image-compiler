@@ -12,6 +12,9 @@ var fs = require('fs');
 var mkdirp = require('mkdirp');
 
 function ImageCompiler(inputTree, options){
+	if(!(this instanceof ImageCompiler)) {
+		return new ImageCompiler(inputTree, options);
+	}
 	this.options = options || {};
 	this.inputTree = inputTree;
 	this.inputFiles = options.inputFiles;
