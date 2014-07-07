@@ -14,7 +14,7 @@ This is a broccoli library for processing image files and creating SASS variable
 5. Make a little love.
 6. Get down tonight.
 
-## Usage
+### Usage
 
 In your `Brocfile.js`: 
 
@@ -46,3 +46,11 @@ Then in your SASS
 	background-image: url($icon_16x16); // if you had a file named "whatever/icon_16x16.png"
 }
 ```
+
+
+Output from this tool includes:
+
+- `$filename` : the data URI variable with the base64 encoded image in it.
+- `$filename_width` : the width of the image
+- `$filename_height` : the height of the image
+- `.icon.filename` : classes that, when applied can be used as an icon for the image file. `<div class="icon filename"></div>`

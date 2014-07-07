@@ -10,6 +10,8 @@ var helpers = require('broccoli-kitchen-sink-helpers');
 var path = require('path');
 var fs = require('fs');
 var mkdirp = require('mkdirp');
+var imageSize = require('image-size');
+var util = require('util');
 
 function ImageCompiler(inputTree, options){
 	if(!(this instanceof ImageCompiler)) {
@@ -31,25 +33,47 @@ ImageCompiler.prototype.constructor = ImageCompiler;
 
 ImageCompiler.prototype = Object.create(Writer.prototype);
 
+ImageCompiler.prototype._createOutput = function(srcDir){
+
+	var inputFiles = helpers.multiGlob(this.inputFiles, { 
+		cwd: srcDir
+	});
+
+	return inputFiles.reduce(function(output, filename) {
+		var filepath = path.resolve(srcDir, filename);
+		var dataUri = new DataURI(filepath);
+		var uri = dataUri.content;
+		var varname = path.basename(filepath, path.extname(filepath));
+		output += util.format('$%s: "%s";\n', varname, dataUri.content);
+
+		var size = imageSize(filepath);
+		output += util.format('$%s_width: %dpx;\n', varname, size.width);
+		output += util.format('$%s_height: %dpx;\n', varname, size.height);
+
+		var iconClass = '.icon {\n' + 
+				'background-repeat: once\n' + 
+				'display: inline-block;\n' +
+				'&.%s {\n' +
+					'background-image: url($%s);\n' + 
+					'background-repeat: once;\n' +
+					'width: $%s_width;\n' + 
+					'height: $%s_width;\n' +
+				'}\n' + 
+			'}\n';
+
+		output += util.format(iconClass, varname, varname, varname, varname);
+		return output;
+	}, '');
+};
+
 ImageCompiler.prototype.write = function(readTree, destDir) {
 	var self = this;
 
 	return readTree(self.inputTree).then(function(srcDir) {
-		var inputFiles = helpers.multiGlob(self.inputFiles, { 
-			cwd: srcDir
-		});
-
-		var output = inputFiles.map(function(filename) {
-			var filepath = path.resolve(srcDir, filename);
-			var dataUri = new DataURI(filepath);
-			var uri = dataUri.content;
-			var varname = path.basename(filepath, path.extname(filepath));
-			return '$' + varname + ': "' + dataUri.content + '";';
-		});
-
+		var output = self._createOutput(srcDir);
     helpers.assertAbsolutePaths([self.outputFile]);
     mkdirp.sync(path.join(destDir, path.dirname(self.outputFile)));
-    fs.writeFileSync(path.join(destDir, self.outputFile), output.join('\n'));
+    fs.writeFileSync(path.join(destDir, self.outputFile), output, 'utf8');
 	});
 };
 
