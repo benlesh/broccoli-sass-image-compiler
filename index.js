@@ -38,8 +38,9 @@ ImageCompiler.prototype.constructor = ImageCompiler;
 ImageCompiler.prototype = Object.create(Writer.prototype);
 
 ImageCompiler.prototype._createOutput = function(srcDir){
+	var self = this;
 
-	var inputFiles = helpers.multiGlob(this.inputFiles, { 
+	var inputFiles = helpers.multiGlob(self.inputFiles, { 
 		cwd: srcDir
 	});
 
@@ -50,12 +51,12 @@ ImageCompiler.prototype._createOutput = function(srcDir){
 		var varname = path.basename(filepath, path.extname(filepath));
 		output += util.format('$%s: "%s";\n', varname, dataUri.content);
 
-		if(this.size || this.icon) {
+		if(self.size || self.icon) {
 			var size = imageSize(filepath);
 			output += util.format('$%s_width: %dpx;\n', varname, size.width);
 			output += util.format('$%s_height: %dpx;\n', varname, size.height);
 
-			if(this.icon) {
+			if(self.icon) {
 				var iconClassFormat = '.%s {\n' + 
 					'  background-repeat: once\n' + 
 					'  display: inline-block;\n\n' +
@@ -67,7 +68,7 @@ ImageCompiler.prototype._createOutput = function(srcDir){
 					'  }\n' + 
 				  '}\n\n';
 
-				output += util.format(iconClassFormat, this.iconClass, varname, varname, varname, varname);
+				output += util.format(iconClassFormat, self.iconClass, varname, varname, varname, varname);
 			}
 		}
 
