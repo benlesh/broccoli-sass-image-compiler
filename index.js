@@ -29,13 +29,13 @@ function ImageCompiler(inputTree, options){
 	}
 }
 
-ImageCompiler.prototype.iconClass = 'icon';
-ImageCompiler.prototype.size = true;
-ImageCompiler.prototype.icon = true;
-
 ImageCompiler.prototype.constructor = ImageCompiler;
 
 ImageCompiler.prototype = Object.create(Writer.prototype);
+
+ImageCompiler.prototype.iconClass = 'icon';
+ImageCompiler.prototype.size = true;
+ImageCompiler.prototype.icon = true;
 
 ImageCompiler.prototype._createOutput = function(srcDir){
 	var self = this;
@@ -57,16 +57,14 @@ ImageCompiler.prototype._createOutput = function(srcDir){
 			output += util.format('$%s_height: %dpx;\n', varname, size.height);
 
 			if(self.icon) {
-				var iconClassFormat = '.%s {\n' + 
+				var iconClassFormat = '.%s.%s {\n' +
 					'  background-repeat: once\n' + 
 					'  display: inline-block;\n\n' +
-					'  &.%s {\n' +
-					'    background-image: url($%s);\n' + 
-					'    background-repeat: once;\n' +
-					'    width: $%s_width;\n' + 
-					'    height: $%s_width;\n' +
-					'  }\n' + 
-				  '}\n\n';
+					'  background-image: url($%s);\n' + 
+					'  background-repeat: once;\n' +
+					'  width: $%s_width;\n' + 
+					'  height: $%s_width;\n' +
+					'}\n\n';
 
 				output += util.format(iconClassFormat, self.iconClass, varname, varname, varname, varname);
 			}

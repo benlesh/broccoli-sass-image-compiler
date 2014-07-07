@@ -4,12 +4,8 @@
 - Add `.icon.name` class output for automatic icon generation
 
 
-### 0.1.1
+### 0.1.3
 
 - Add ability to configure icon class name
 - Add ability to switch icon class output
 - Add ability to switch width/height output
-
-### 0.1.2 
-
-- Fixed scoping issue
