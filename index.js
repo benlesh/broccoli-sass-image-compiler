@@ -29,6 +29,10 @@ function ImageCompiler(inputTree, options){
 	}
 }
 
+ImageCompiler.prototype.iconClass = 'icon';
+ImageCompiler.prototype.size = true;
+ImageCompiler.prototype.icon = true;
+
 ImageCompiler.prototype.constructor = ImageCompiler;
 
 ImageCompiler.prototype = Object.create(Writer.prototype);
@@ -46,22 +50,27 @@ ImageCompiler.prototype._createOutput = function(srcDir){
 		var varname = path.basename(filepath, path.extname(filepath));
 		output += util.format('$%s: "%s";\n', varname, dataUri.content);
 
-		var size = imageSize(filepath);
-		output += util.format('$%s_width: %dpx;\n', varname, size.width);
-		output += util.format('$%s_height: %dpx;\n', varname, size.height);
+		if(this.size || this.icon) {
+			var size = imageSize(filepath);
+			output += util.format('$%s_width: %dpx;\n', varname, size.width);
+			output += util.format('$%s_height: %dpx;\n', varname, size.height);
 
-		var iconClass = '.icon {\n' + 
-				'background-repeat: once\n' + 
-				'display: inline-block;\n' +
-				'&.%s {\n' +
-					'background-image: url($%s);\n' + 
-					'background-repeat: once;\n' +
-					'width: $%s_width;\n' + 
-					'height: $%s_width;\n' +
-				'}\n' + 
-			'}\n';
+			if(this.icon) {
+				var iconClassFormat = '.%s {\n' + 
+					'  background-repeat: once\n' + 
+					'  display: inline-block;\n\n' +
+					'  &.%s {\n' +
+					'    background-image: url($%s);\n' + 
+					'    background-repeat: once;\n' +
+					'    width: $%s_width;\n' + 
+					'    height: $%s_width;\n' +
+					'  }\n' + 
+				  '}\n\n';
 
-		output += util.format(iconClass, varname, varname, varname, varname);
+				output += util.format(iconClassFormat, this.iconClass, varname, varname, varname, varname);
+			}
+		}
+
 		return output;
 	}, '');
 };

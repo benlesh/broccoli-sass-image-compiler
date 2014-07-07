@@ -26,9 +26,6 @@ describe('broccoli-sass-image-compiler', function(){
 			outputFile: '/compiled-images.scss'
 		});
 
-		var blah = tree._createOutput('test/fixtures', ['a.jpg', 'b.png', 'c.gif']);
-		fs.writeFileSync('test/fixtures/blah.txt', blah, 'utf8');
-
 		builder = new broccoli.Builder(tree);
 
 		return builder.build().then(function(results){

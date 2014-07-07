@@ -28,7 +28,19 @@ var imageTree = sassImageCompiler('/some_dir', {
 	],
 
 	// specify the output file you want created
-	outputFile: '/compiled-images.scss'
+	outputFile: '/compiled-images.scss',
+
+	// whether or not to output an icon class
+	// defaults to true
+	icon: true,
+
+	// whether or not to output width and height variables, required for icon class.
+	// defaults to true
+	size: true, 
+
+	// name for parent class of icon class output (i.e "icon" in `.icon.image_name`)
+	// defaults to "icon"
+	iconClass: 'icon'
 });
 ```
 
