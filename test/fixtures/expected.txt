@@ -2,7 +2,7 @@ $b: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABQAAAALQCAIAAABAH0oBAAAABGdBT
 $b_width: 1280px;
 $b_height: 720px;
 .icon.b {
-  background-repeat: once
+  background-repeat: once;
   display: inline-block;
 
   background-image: url($b);
@@ -15,7 +15,7 @@ $a: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQIBAQICAQICAgIC
 $a_width: 500px;
 $a_height: 315px;
 .icon.a {
-  background-repeat: once
+  background-repeat: once;
   display: inline-block;
 
   background-image: url($a);
@@ -28,7 +28,7 @@ $c: "data:image/gif;base64,R0lGODlh9AEZAfcAAAUFAgsLBRMOCBETCh4WChgVDRkcDB4WEhobE
 $c_width: 500px;
 $c_height: 281px;
 .icon.c {
-  background-repeat: once
+  background-repeat: once;
   display: inline-block;
 
   background-image: url($c);

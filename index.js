@@ -58,7 +58,7 @@ ImageCompiler.prototype._createOutput = function(srcDir){
 
 			if(self.icon) {
 				var iconClassFormat = '.%s.%s {\n' +
-					'  background-repeat: once\n' + 
+					'  background-repeat: once;\n' + 
 					'  display: inline-block;\n\n' +
 					'  background-image: url($%s);\n' + 
 					'  background-repeat: once;\n' +
