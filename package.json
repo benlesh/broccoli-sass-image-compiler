@@ -1,6 +1,6 @@
 {
   "name": "broccoli-sass-image-compiler",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Compress images to Base64 Data URIs in variables and output to SCSS file",
   "main": "index.js",
   "scripts": {
